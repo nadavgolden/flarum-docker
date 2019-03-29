@@ -4,6 +4,7 @@ RUN apt update
 RUN apt install -y nginx vim curl git software-properties-common unzip mariadb-client mariadb-server
 
 # install mysql
+RUN apt -y install expect
 COPY mysql_install.sh /home/
 RUN chmod 774 /home/mysql_install.sh
 RUN /home/mysql_install.sh

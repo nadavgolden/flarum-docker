@@ -1,9 +1,11 @@
+
+MYSQL_ROOT_PASSWORD=12345678
+
+FLARUM_DB_NAME=flarumdb
+FLARUM_USERNAME=flarumuser
+FLARUM_PASSWORD=12345678
+
 service mysql start
-
-apt -y install expect
-
-# Not required in actual script
-MYSQL_ROOT_PASSWORD=1
 
 SECURE_MYSQL=$(expect -c "
 set timeout 10
@@ -13,9 +15,9 @@ send \"\r\"
 expect \"Change the root password?\"
 send \"y\r\"
 expect \"New password:\"
-send \"1\r\"
+send \"$MYSQL_ROOT_PASSWORD\r\"
 expect \"Repeat new password:\"
-send \"1\r\"
+send \"$MYSQL_ROOT_PASSWORD\r\"
 expect \"Remove anonymous users?\"
 send \"y\r\"
 expect \"Disallow root login remotely?\"
@@ -29,7 +31,5 @@ expect eof
 
 echo "$SECURE_MYSQL"
 
-apt -y purge expect
-
-mysql --user=root --password=1 -e "CREATE DATABASE flarumdb; CREATE USER 'flarumuser'@'localhost' IDENTIFIED BY '12345678'; GRANT ALL PRIVILEGES ON flarumdb.* To 'flarumuser'@'localhost';"
+mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $FLARUM_DB_NAME; CREATE USER '$FLARUM_USERNAME'@'localhost' IDENTIFIED BY '$FLARUM_PASSWORD'; GRANT ALL PRIVILEGES ON $FLARUM_DB_NAME.* To '$FLARUM_USERNAME'@'localhost';"
 
