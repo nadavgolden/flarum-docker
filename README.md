@@ -1,9 +1,16 @@
 # Building
-- You can easily edit the script `mysql_install.sh` to change:
+Don't trust me? That's good.
+If you want to build an image with a different configuration, you can:
+
+- Edit the script `mysql_install.sh` to change:
 1. mysql root password
 2. Flarum's username and password on mysql server
+3. Flarum's database name
+(editing the variables at the top of the file is recommended)
 
 - Change nginx config for flarum by editting `flarum.conf`
+
+Then run `sudo docker build .`
     
 # Pulling
 
