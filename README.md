@@ -4,7 +4,14 @@
 2. Flarum's username and password on mysql server
 
 - Change nginx config for flarum by editting `flarum.conf`
-    
+- Build image:
+
+`sudo docker build -t nadi106/flarum:0.1.0-beta.8 . `
+
+- Run instance:
+
+`sudo docker run -d -p 80:80 nadi106/flarum:0.1.0-beta.8`
+
 # Pulling
 
 `sudo docker run -d -p 80:80 nadi106/flarum:0.1.0-beta.8`
@@ -13,7 +20,7 @@
 
 ### MySQL
 - Root password: `12345678`
-- Databse: `flarumdb`
+- Database: `flarumdb`
 - Username for Flarum: `flarumuser`
 - Password for user: `12345678`
 
